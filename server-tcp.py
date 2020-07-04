@@ -3,7 +3,7 @@ import socket
 # socket object with socket family and type
 serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-host = socket.gethostname() #server address
+host = socket.gethostname() #server's ip address 192.168.2.178
 if(host):
   print("got the host name: " + host)
 else:
@@ -19,7 +19,7 @@ serversocket.listen(3)
 
 while True:
   clientsocket, address = serversocket.accept()
-  print("Received connection from " %str(address))
+  print("Received connection from %r" % str(address))
   message = "Connected to the server" + "\r\n"
-  clientsocket.send(message)
+  clientsocket.send(message.encode('ascii'))
   clientsocket.close()
