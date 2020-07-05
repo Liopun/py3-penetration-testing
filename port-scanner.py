@@ -1,28 +1,15 @@
-import nmap
+import socket
 
-scanner = nmap.PortScanner()
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.settimeout(5)
 
-print("--------SIMPLE NMAP AUTOMATION TOOL--------")
-print("<------------------------------------------>")
+host = input("Please enter the IP you want to scan: ")
+port = int(input("Please enter the port you want to scan: "))
 
-ip_addr = input("Enter the IP address you want to scan: ")
-print("The IP you entered is: ", ip_addr)
-type(ip_addr)
+def portScanner(port):
+    if s.connect_ex((host, port)):
+      print("The port is closed")
+    else:
+      print("The port is open")
 
-resp = input("""\nPlease enter the type of scan you want to run
-                1)SYN ACK Scan
-                2)UDP scan
-                3)Comprehensive Scan\n""")
-print("You have selected option: ", resp)
-
-if (resp == '1'):
-  print("Nmap version: ", scanner.nmap_version())
-  scanner.scan(ip_addr, '1-1024', '-v -sS')
-  print(scanner.scaninfo())
-  print("IP status: ", scanner[ip_addr].state())
-  print("IP protocol: ", scanner[ip_addr].all_protocols())
-  print("Open ports: ", scanner[ip_addr]['tcp'].keys())
-
-
-
-
+portScanner(port)
