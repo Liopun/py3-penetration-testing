@@ -12,7 +12,7 @@ else:
 port = 4444 #server port
 
 # binding the server
-serversocket.bind((host, port))
+serversocket.bind(('192.168.2.178', port))
 
 # listening to connections up to 3
 serversocket.listen(3)
